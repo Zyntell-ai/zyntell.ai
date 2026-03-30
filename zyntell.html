@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ZYNTELL – AI-Powered Customer Automation</title>
+<meta name="description" content="ZYNTELL captures every missed call, message and inquiry — AI responds, books and converts 24/7. Built for clinics, restaurants, real estate and service businesses."/>
+<meta name="keywords" content="AI automation for businesses, customer booking automation, WhatsApp automation for clinics, missed call automation system, AI chatbot booking system"/>
+<meta property="og:title" content="ZYNTELL – Never Miss a Customer Again"/>
+<meta property="og:description" content="AI-powered automation platform. Never miss a customer again."/>
+<meta property="og:type" content="website"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Jersey+15&family=Jersey+10&family=Handjet:wght@100;200;300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+/* ══════════════════════════════════════════
+   CSS CUSTOM PROPERTIES – EXACT TOKENS
+══════════════════════════════════════════ */
+:root {
+  /* DARK MODE */
+  --bg-primary:    #0B0F1A;
+  --bg-secondary:  #121826;
+  --primary:       #4F46E5;
+  --primary-glow:  #6C5CE7;
+  --accent:        #00C2FF;
+  --text-primary:  #E6EAF2;
+  --text-secondary:#9AA4B2;
+  --border:        #1F2937;
+  /* Computed */
+  --grad-main:  linear-gradient(135deg, #4F46E5, #00C2FF);
+  --grad-alt:   linear-gradient(135deg, #6C5CE7, #4F46E5);
+  --glass:      rgba(255,255,255,0.04);
+  --glass-b:    rgba(255,255,255,0.07);
+  --sh-glow:    0 0 60px rgba(79,70,229,0.25);
+  --sh-card:    0 20px 60px rgba(0,0,0,0.45);
+  /* Phone skin — dark */
+  --ph-body:    #1b2030;
+  --ph-frame:   #0e1220;
+  --ph-rim:     #252d42;
+  --ph-btn:     #171e2e;
+  --ph-screen:  #090c16;
+}
+[data-theme="light"] {
+  --bg-primary:    #F8FAFC;
+  --bg-secondary:  #FFFFFF;
+  --primary:       #4F46E5;
+  --primary-glow:  #6C5CE7;
+  --accent:        #0EA5E9;
+  --text-primary:  #0F172A;
+  --text-secondary:#475569;
+  --border:        #E2E8F0;
+  --grad-main:  linear-gradient(135deg, #4F46E5, #0EA5E9);
+  --grad-alt:   linear-gradient(135deg, #6C5CE7, #4F46E5);
+  --glass:      rgba(0,0,0,0.03);
+  --glass-b:    rgba(0,0,0,0.07);
+  --sh-glow:    0 0 60px rgba(79,70,229,0.1);
+  --sh-card:    0 20px 60px rgba(0,0,0,0.08);
+  --ph-body:    #c8cdd8;
+  --ph-frame:   #adb2bf;
+  --ph-rim:     #d6dae5;
+  --ph-btn:     #b8bdc9;
+  --ph-screen:  #090c16;
+}
+
+/* ══════════════════════════════════════════
+   BASE
+══════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg-primary);color:var(--text-primary);
+  font-family:'DM Sans',sans-serif;overflow-x:hidden;
+  transition:background .4s,color .4s;-webkit-font-smoothing:antialiased;
+}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg-primary)}
+::-webkit-scrollbar-thumb{background:var(--primary);border-radius:3px}
+
+/* ══════════════════════════════════════════
+   NAVBAR
+══════════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:1.2rem 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .4s;
+}
+nav.scrolled{
+  background:rgba(11,15,26,.88);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+  padding:.85rem 2.5rem;
+}
+[data-theme="light"] nav.scrolled{background:rgba(248,250,252,.92)}
+.nav-logo{
+  font-family:'Chakra Petch',sans-serif;font-size:1.5rem;font-weight:700;
+  background:var(--grad-main);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  letter-spacing:1.5px;text-decoration:none;
+}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{
+  color:var(--text-secondary);text-decoration:none;
+  font-size:.875rem;font-weight:500;letter-spacing:.3px;transition:color .3s;
+  position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-3px;left:0;right:0;
+  height:1px;background:var(--grad-main);
+  transform:scaleX(0);transition:transform .3s;transform-origin:left;
+}
+.nav-links a:hover{color:var(--text-primary)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-r{display:flex;align-items:center;gap:.9rem}
+.nav-cta{
+  background:var(--grad-main);color:#fff;padding:.6rem 1.4rem;
+  border-radius:8px;font-family:'Chakra Petch',sans-serif;
+  font-size:.85rem;font-weight:600;letter-spacing:.5px;
+  text-decoration:none;border:none;cursor:pointer;transition:all .3s;
+  box-shadow:0 4px 20px rgba(79,70,229,.4);
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(79,70,229,.6)}
+.theme-nav-btn{
+  width:36px;height:36px;border-radius:8px;
+  background:var(--glass);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:1rem;transition:all .3s;color:var(--text-secondary);
+}
+.theme-nav-btn:hover{background:rgba(79,70,229,.12);border-color:var(--primary);color:var(--text-primary)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{width:22px;height:2px;background:var(--text-primary);border-radius:2px;transition:.3s}
+
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.hero-glow{
+  position:absolute;inset:0;z-index:1;
+  background:radial-gradient(ellipse 65% 58% at 42% 55%, rgba(79,70,229,.1) 0%, transparent 65%);
+}
+.hero-content{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;
+  max-width:1240px;margin:0 auto;padding:8rem 2.5rem 4rem;width:100%;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(79,70,229,.1);border:1px solid rgba(79,70,229,.3);
+  border-radius:6px;padding:.3rem .9rem;
+  font-family:'Handjet',sans-serif;font-size:1rem;letter-spacing:2px;
+  color:var(--accent);margin-bottom:1.3rem;
+  opacity:0;animation:fadeUp .7s .2s forwards;
+}
+.hero-eyebrow::before{content:'◉';font-size:.6rem;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+h1.hero-h1{
+  font-family:'Chakra Petch',sans-serif;
+  font-size:clamp(2.6rem,4.5vw,4rem);font-weight:700;
+  line-height:1.06;letter-spacing:-.5px;
+  opacity:0;animation:fadeUp .7s .35s forwards;
+}
+.grad-text{background:var(--grad-main);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{
+  margin-top:1.3rem;font-size:1.02rem;line-height:1.72;
+  color:var(--text-secondary);max-width:460px;
+  opacity:0;animation:fadeUp .7s .5s forwards;
+}
+.hero-btns{
+  display:flex;gap:.9rem;margin-top:2.2rem;flex-wrap:wrap;
+  opacity:0;animation:fadeUp .7s .65s forwards;
+}
+.btn-p{
+  background:var(--grad-main);color:#fff;padding:.8rem 1.9rem;
+  border-radius:8px;font-family:'Chakra Petch',sans-serif;
+  font-size:.9rem;font-weight:600;letter-spacing:.5px;
+  text-decoration:none;border:none;cursor:pointer;transition:all .3s;
+  box-shadow:0 4px 24px rgba(79,70,229,.45);
+  display:inline-flex;align-items:center;gap:.45rem;
+}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(79,70,229,.65)}
+.btn-g{
+  background:transparent;color:var(--text-primary);padding:.8rem 1.9rem;
+  border-radius:8px;font-family:'Chakra Petch',sans-serif;
+  font-size:.9rem;font-weight:600;letter-spacing:.5px;
+  text-decoration:none;border:1px solid var(--border);
+  cursor:pointer;transition:all .3s;
+  display:inline-flex;align-items:center;gap:.45rem;
+}
+.btn-g:hover{border-color:var(--primary);background:rgba(79,70,229,.07);transform:translateY(-2px)}
+.hero-stats{
+  display:flex;gap:2.5rem;margin-top:3rem;
+  opacity:0;animation:fadeUp .7s .8s forwards;
+}
+.sv{font-family:'Chakra Petch',sans-serif;font-size:2rem;font-weight:700;background:var(--grad-alt);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sl{font-size:.74rem;color:var(--text-secondary);margin-top:.15rem;letter-spacing:.3px}
+
+/* ══════════════════════════════════════════
+   REALISTIC 3-D PHONE
+══════════════════════════════════════════ */
+.phone-wrap{
+  display:flex;justify-content:center;align-items:center;
+  perspective:1200px;
+  opacity:0;animation:fadeIn 1s 1s forwards;
+}
+.phone-3d{
+  position:relative;width:295px;height:590px;
+  transform-style:preserve-3d;
+  cursor:pointer;will-change:transform;
+}
+
+/* ── Body shell ── */
+.phone-body{
+  position:absolute;inset:0;
+  background:linear-gradient(158deg,var(--ph-rim) 0%,var(--ph-body) 45%,var(--ph-frame) 100%);
+  border-radius:44px;transform-style:preserve-3d;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.13),
+    inset 0 -1px 0 rgba(0,0,0,.45),
+    inset -1px 0 0 rgba(0,0,0,.35),
+    inset 1px 0 0 rgba(255,255,255,.07),
+    0 40px 120px rgba(0,0,0,.75),
+    0 8px 30px rgba(0,0,0,.55),
+    0 0 0 1.5px rgba(0,0,0,.65);
+  transition:box-shadow .12s;
+}
+/* Chamfer highlight */
+.phone-body::before{
+  content:'';position:absolute;inset:2px;border-radius:42px;
+  background:linear-gradient(158deg,rgba(255,255,255,.08) 0%,transparent 55%);
+  pointer-events:none;
+}
+/* Outer frame edge */
+.phone-body::after{
+  content:'';position:absolute;inset:-1px;border-radius:45px;
+  background:transparent;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);
+  pointer-events:none;
+}
+
+/* ── Screen ── */
+.phone-screen-area{
+  position:absolute;top:14px;left:10px;right:10px;bottom:14px;
+  background:var(--ph-screen);border-radius:36px;overflow:hidden;
+  box-shadow:inset 0 0 40px rgba(0,0,0,.85),inset 0 2px 4px rgba(0,0,0,.6);
+}
+
+/* ── Dynamic Island ── */
+.dyn-island{
+  position:absolute;top:14px;left:50%;transform:translateX(-50%);
+  width:126px;height:36px;background:#000;border-radius:50px;z-index:20;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  box-shadow:0 2px 10px rgba(0,0,0,.9);
+  transition:all .45s cubic-bezier(.34,1.56,.64,1);
+}
+.dyn-island.expand{width:210px;height:40px}
+.di-cam{width:8px;height:8px;border-radius:50%;background:#111;border:1px solid #222}
+.di-mic{width:4px;height:4px;border-radius:50%;background:#111}
+.di-txt{
+  display:none;align-items:center;gap:5px;
+  font-family:'Handjet',sans-serif;font-size:.7rem;color:#fff;letter-spacing:1.5px;
+}
+.dyn-island.expand .di-txt{display:flex}
+
+/* ── Side buttons ── */
+.btn-vol-up,.btn-vol-dn,.btn-silent{
+  position:absolute;left:-4.5px;
+  background:linear-gradient(90deg,var(--ph-btn),rgba(255,255,255,.05) 40%,var(--ph-btn));
+  border-radius:3px 0 0 3px;
+  box-shadow:-2px 0 5px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.07);
+  cursor:pointer;transform-origin:right center;
+  transition:transform .15s,box-shadow .15s;
+}
+.btn-silent{top:98px;width:4.5px;height:30px}
+.btn-vol-up{top:150px;width:4.5px;height:64px}
+.btn-vol-dn{top:226px;width:4.5px;height:64px}
+.btn-vol-up:hover,.btn-vol-dn:hover,.btn-silent:hover{transform:translateX(-2px) scaleX(.65);box-shadow:-1px 0 3px rgba(0,0,0,.55)}
+.btn-vol-up:active,.btn-vol-dn:active,.btn-silent:active{transform:translateX(-1px) scaleX(.45)}
+
+.btn-power{
+  position:absolute;right:-4.5px;top:175px;width:4.5px;height:82px;
+  background:linear-gradient(270deg,var(--ph-btn),rgba(255,255,255,.05) 40%,var(--ph-btn));
+  border-radius:0 3px 3px 0;
+  box-shadow:2px 0 5px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.07);
+  cursor:pointer;transform-origin:left center;
+  transition:transform .15s,box-shadow .15s;
+}
+.btn-power:hover{transform:translateX(2px) scaleX(.65);box-shadow:1px 0 3px rgba(0,0,0,.55)}
+.btn-power:active{transform:translateX(1px) scaleX(.45)}
+
+/* ── Bottom detail ── */
+.ph-bottom{
+  position:absolute;bottom:18px;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:5px;z-index:5;
+}
+.sp-hole{width:3px;height:3px;border-radius:50%;background:rgba(0,0,0,.75);box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.connector{width:14px;height:5px;border-radius:3px;background:linear-gradient(180deg,#0a0c12,#1a1d28);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);margin:0 3px}
+
+/* ── Camera module (rear — shows on flip) ── */
+.cam-module{
+  position:absolute;top:30px;left:22px;width:82px;height:82px;
+  background:linear-gradient(145deg,rgba(255,255,255,.04),transparent);
+  border-radius:22px;border:1px solid rgba(255,255,255,.06);
+  display:flex;flex-wrap:wrap;gap:8px;padding:10px;
+  opacity:0;pointer-events:none;transition:opacity .4s;z-index:30;
+}
+.cam-lens{
+  width:24px;height:24px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#2a2a3e,#050507);
+  border:2px solid rgba(255,255,255,.07);
+  box-shadow:0 0 0 1px rgba(0,0,0,.5),inset 0 0 10px rgba(0,0,0,.8);
+  position:relative;
+}
+.cam-lens::after{content:'';position:absolute;top:4px;left:4px;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.12)}
+
+/* ── Touch ripple ── */
+.t-ripple{
+  position:absolute;border-radius:50%;pointer-events:none;z-index:100;
+  background:radial-gradient(circle,rgba(79,70,229,.45),transparent 70%);
+  width:0;height:0;transform:translate(-50%,-50%);
+  animation:rp .55s ease-out forwards;
+}
+@keyframes rp{0%{width:0;height:0;opacity:1}100%{width:110px;height:110px;opacity:0}}
+
+/* ══ Screen content ══ */
+.sc-wrap{
+  position:absolute;inset:14px 10px 14px;
+  border-radius:36px;overflow:hidden;
+  background:#0e1220;display:flex;flex-direction:column;
+}
+.sc-status{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 22px 3px;
+  font-family:'Handjet',sans-serif;font-size:.78rem;
+  color:rgba(255,255,255,.65);letter-spacing:1px;
+}
+.sc-body{flex:1;overflow:hidden;position:relative}
+
+/* ── Theme toggle inside phone ── */
+.phone-toggle{
+  position:absolute;bottom:16px;right:13px;
+  width:54px;height:28px;
+  background:rgba(79,70,229,.18);
+  border:1px solid rgba(79,70,229,.35);
+  border-radius:14px;cursor:pointer;z-index:60;
+  display:flex;align-items:center;padding:0 3px;
+  transition:background .4s;
+}
+.toggle-knob{
+  width:22px;height:22px;border-radius:50%;
+  background:var(--grad-main);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.68rem;
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 2px 8px rgba(79,70,229,.6);
+  flex-shrink:0;
+}
+[data-theme="light"] .toggle-knob{transform:translateX(26px)}
+
+/* ══ PHONE STAGES ══ */
+.p-stage{
+  position:absolute;inset:0;opacity:0;transition:opacity .5s;
+  pointer-events:none;
+  padding:0 13px 50px;display:flex;flex-direction:column;
+}
+.p-stage.on{opacity:1;pointer-events:auto}
+
+/* Stage 1 — Incoming */
+.call-c{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.1rem}
+.caller-ring{
+  width:88px;height:88px;border-radius:50%;
+  background:var(--grad-main);
+  display:flex;align-items:center;justify-content:center;font-size:2.2rem;
+  animation:ring-sway 1.3s infinite;position:relative;
+}
+.caller-ring::before,.caller-ring::after{
+  content:'';position:absolute;border-radius:50%;
+  border:2px solid rgba(79,70,229,.3);
+  animation:ring-wave 1.4s infinite;
+}
+.caller-ring::before{inset:-14px}
+.caller-ring::after{inset:-28px;animation-delay:.35s}
+@keyframes ring-sway{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+@keyframes ring-wave{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(1.4)}}
+.cn{font-family:'Chakra Petch',sans-serif;font-size:1rem;font-weight:600;color:#E6EAF2}
+.cnum{font-family:'Handjet',sans-serif;font-size:.82rem;color:rgba(230,234,242,.45);letter-spacing:1.5px}
+.call-acts{display:flex;gap:2.5rem;margin-top:.5rem}
+.ca{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;border:none;transition:transform .2s,box-shadow .2s}
+.ca.end{background:#EF4444;box-shadow:0 0 20px rgba(239,68,68,.5)}
+.ca.ans{background:#10B981;box-shadow:0 0 20px rgba(16,185,129,.5)}
+.ca:active{transform:scale(.87)}
+
+/* Stage 2 — Missed */
+.miss-c{flex:1;display:flex;flex-direction:column;gap:.7rem;padding-top:.3rem}
+.notif-c{
+  background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);
+  border-radius:14px;padding:.75rem;display:flex;align-items:center;gap:.7rem;
+}
+.ni{font-size:1.3rem}
+.nb{font-size:.7rem;line-height:1.45;color:rgba(230,234,242,.65)}
+.nb strong{color:#F87171;display:block;margin-bottom:2px;font-size:.67rem}
+.ai-act{
+  background:rgba(79,70,229,.1);border:1px solid rgba(79,70,229,.28);
+  border-radius:14px;padding:.85rem;text-align:center;
+}
+.ai-lbl{font-family:'Handjet',sans-serif;font-size:.95rem;letter-spacing:2px;color:var(--accent);margin-bottom:.3rem}
+.ai-sub{font-size:.65rem;color:rgba(230,234,242,.35);margin-bottom:.5rem}
+.ai-bar{height:3px;background:rgba(79,70,229,.18);border-radius:2px;overflow:hidden}
+.ai-prog{height:100%;background:var(--grad-main);border-radius:2px;animation:aiload 2.2s ease-in-out infinite}
+@keyframes aiload{0%{width:0%}70%{width:100%}100%{width:100%;opacity:0}}
+.arr{text-align:center;font-size:1.1rem;color:var(--accent);animation:bob .9s infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* Stage 3 — Chat */
+.chat-c{flex:1;display:flex;flex-direction:column;gap:.5rem;overflow:hidden}
+.chat-top{display:flex;align-items:center;gap:.55rem;padding-bottom:.5rem;border-bottom:1px solid rgba(255,255,255,.06)}
+.b-av{width:29px;height:29px;border-radius:50%;background:var(--grad-main);display:flex;align-items:center;justify-content:center;font-size:.78rem}
+.b-nm{font-family:'Chakra Petch',sans-serif;font-size:.75rem;font-weight:600;color:#E6EAF2}
+.b-on{width:7px;height:7px;border-radius:50%;background:#10B981;margin-left:auto;box-shadow:0 0 6px #10B981}
+.msgs{flex:1;display:flex;flex-direction:column;gap:.45rem;overflow:hidden}
+.m{max-width:88%;padding:.48rem .65rem;border-radius:12px;font-size:.68rem;line-height:1.45}
+.m.bot{background:rgba(79,70,229,.18);border:1px solid rgba(79,70,229,.22);align-self:flex-start;border-bottom-left-radius:3px;color:#E6EAF2}
+.m.usr{background:var(--grad-main);align-self:flex-end;border-bottom-right-radius:3px;color:#fff}
+.typing-wrap{display:flex;gap:3px;align-items:center;padding:.5rem .65rem;background:rgba(79,70,229,.18);border-radius:12px;border-bottom-left-radius:3px;align-self:flex-start}
+.td{width:5px;height:5px;border-radius:50%;background:rgba(230,234,242,.45);animation:tdot 1.1s infinite}
+.td:nth-child(2){animation-delay:.17s}.td:nth-child(3){animation-delay:.34s}
+@keyframes tdot{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-4px);opacity:1}}
+
+/* Stage 4 — Confirmed */
+.confirm-c{flex:1;display:flex;flex-direction:column;gap:.6rem}
+.conf-card{
+  background:linear-gradient(135deg,rgba(16,185,129,.12),rgba(0,194,255,.08));
+  border:1px solid rgba(16,185,129,.28);
+  border-radius:16px;padding:.9rem;text-align:center;
+}
+.ck{font-size:2rem;display:block;margin-bottom:.35rem}
+.conf-card h4{font-family:'Chakra Petch',sans-serif;font-size:.82rem;font-weight:600;color:#34D399;margin-bottom:.18rem}
+.conf-card p{font-size:.62rem;color:rgba(230,234,242,.42)}
+.dr{display:flex;align-items:center;gap:.55rem;font-size:.66rem;color:rgba(230,234,242,.55)}
+.dr span:first-child{font-size:.82rem}
+.zyn-tag{
+  background:rgba(79,70,229,.14);border:1px solid rgba(79,70,229,.24);
+  border-radius:8px;padding:.4rem .65rem;
+  font-family:'Handjet',sans-serif;font-size:.78rem;
+  color:var(--accent);text-align:center;letter-spacing:1px;margin-top:auto;
+}
+
+/* Stage dots */
+.sdots{display:flex;gap:5px;justify-content:center;padding:7px 0 4px}
+.sd{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.13);transition:all .4s}
+.sd.on{background:var(--accent);box-shadow:0 0 6px var(--accent);width:15px;border-radius:3px}
+
+/* ══════════════════════════════════════════
+   SECTION SHARED
+══════════════════════════════════════════ */
+section{padding:7rem 2.5rem}
+.container{max-width:1240px;margin:0 auto}
+.s-tag{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(0,194,255,.07);border:1px solid rgba(0,194,255,.18);
+  border-radius:5px;padding:.25rem .8rem;
+  font-family:'Handjet',sans-serif;font-size:.92rem;letter-spacing:2px;color:var(--accent);
+  margin-bottom:1.1rem;
+}
+h2.s-title{
+  font-family:'Chakra Petch',sans-serif;
+  font-size:clamp(1.9rem,3.8vw,2.85rem);font-weight:700;
+  line-height:1.1;letter-spacing:-.5px;
+}
+.s-sub{color:var(--text-secondary);font-size:.98rem;line-height:1.72;max-width:500px;margin-top:.9rem}
+
+/* ══════════════════════════════════════════
+   PROBLEM
+══════════════════════════════════════════ */
+#problem{background:var(--bg-secondary);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.prob-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.3rem;margin-top:3rem}
+.prob-card{
+  background:var(--bg-primary);border:1px solid var(--border);
+  border-radius:16px;padding:1.7rem;transition:all .4s;position:relative;overflow:hidden;
+}
+.prob-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--grad-main);opacity:0;transition:opacity .4s;
+}
+.prob-card:hover::before{opacity:1}
+.prob-card:hover{border-color:rgba(79,70,229,.35);transform:translateY(-4px);box-shadow:var(--sh-card)}
+.pi{font-size:2rem;margin-bottom:.9rem;display:block}
+.prob-card h3{font-family:'Chakra Petch',sans-serif;font-size:.93rem;font-weight:600;margin-bottom:.45rem}
+.prob-card p{font-size:.82rem;color:var(--text-secondary);line-height:1.62}
+.pstat{font-family:'Jersey 15',sans-serif;font-size:.87rem;color:#F87171;margin-top:.75rem;letter-spacing:1px}
+
+/* ══════════════════════════════════════════
+   CATEGORIES
+══════════════════════════════════════════ */
+#categories{background:var(--bg-primary)}
+.cat-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:2.5rem;align-items:start;margin-top:3rem}
+.cat-tabs{display:flex;flex-direction:column;gap:.9rem}
+.cat-tab{
+  background:var(--bg-secondary);border:1px solid var(--border);
+  border-radius:14px;padding:1.15rem 1.35rem;cursor:pointer;transition:all .4s;
+  display:flex;align-items:center;gap:.9rem;
+}
+.cat-tab:hover,.cat-tab.on{
+  border-color:rgba(79,70,229,.45);transform:translateX(5px);
+  background:rgba(79,70,229,.05);
+}
+.cat-tab.on{box-shadow:var(--sh-glow)}
+.cte{font-size:1.6rem;min-width:34px}
+.cti h3{font-family:'Chakra Petch',sans-serif;font-size:.88rem;font-weight:600}
+.cti p{font-size:.74rem;color:var(--text-secondary);margin-top:.12rem}
+.cat-prev{
+  background:var(--bg-secondary);border:1px solid var(--border);
+  border-radius:20px;padding:1.8rem;min-height:365px;
+  display:flex;flex-direction:column;position:sticky;top:90px;
+}
+.pv-panel{display:none;flex-direction:column;gap:.85rem;flex:1}
+.pv-panel.on{display:flex;animation:fadeIn .45s}
+.pv-head{display:flex;align-items:center;gap:.8rem;margin-bottom:.4rem}
+.pv-em{font-size:2.1rem}
+.pv-head h3{font-family:'Chakra Petch',sans-serif;font-size:1.15rem;font-weight:700}
+.pv-head p{font-size:.76rem;color:var(--text-secondary)}
+.pv-feats{display:flex;flex-direction:column;gap:.5rem}
+.pv-feat{display:flex;align-items:center;gap:.55rem;font-size:.81rem;color:var(--text-secondary)}
+.pv-feat::before{content:'✓';color:var(--accent);font-weight:700;flex-shrink:0}
+.pv-metric{
+  margin-top:auto;background:rgba(0,194,255,.05);
+  border:1px solid rgba(0,194,255,.14);border-radius:12px;
+  padding:.85rem 1.05rem;display:flex;justify-content:space-between;align-items:center;
+}
+.mv{font-family:'Chakra Petch',sans-serif;font-size:1.75rem;font-weight:700;color:var(--accent)}
+.ml{font-size:.71rem;color:var(--text-secondary);margin-top:2px}
+
+/* ══════════════════════════════════════════
+   DEMO — HANDJET BOTS
+══════════════════════════════════════════ */
+#demo{background:var(--bg-secondary);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.demo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:1.3rem;margin-top:3rem}
+.demo-card{
+  background:var(--bg-primary);border:1px solid var(--border);
+  border-radius:18px;padding:1.7rem;cursor:pointer;transition:all .4s;
+  text-decoration:none;color:inherit;
+  display:flex;flex-direction:column;gap:.75rem;
+  position:relative;overflow:hidden;
+}
+.demo-card::after{content:'';position:absolute;inset:0;background:var(--grad-alt);opacity:0;transition:opacity .4s}
+.demo-card:hover::after{opacity:.045}
+.demo-card:hover{border-color:rgba(79,70,229,.42);transform:translateY(-5px);box-shadow:var(--sh-card)}
+.dc-ico{width:50px;height:50px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;position:relative;z-index:1}
+.demo-card h3{
+  font-family:'Handjet',sans-serif;font-size:1.35rem;font-weight:400;letter-spacing:2.5px;
+  background:var(--grad-main);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  position:relative;z-index:1;
+}
+.demo-card p{font-size:.8rem;color:var(--text-secondary);line-height:1.6;position:relative;z-index:1}
+.bot-chip{
+  background:rgba(79,70,229,.1);border:1px solid rgba(79,70,229,.2);
+  border-radius:7px;padding:.4rem .65rem;
+  font-family:'Handjet',sans-serif;font-size:.85rem;letter-spacing:1.5px;
+  color:rgba(230,234,242,.5);
+  display:flex;align-items:center;gap:.35rem;
+  position:relative;z-index:1;
+}
+.bot-chip::before{content:'▸';color:var(--accent)}
+.dc-link{
+  font-family:'Jersey 15',sans-serif;font-size:.88rem;letter-spacing:1px;
+  color:var(--accent);margin-top:auto;
+  display:inline-flex;align-items:center;gap:.35rem;
+  position:relative;z-index:1;
+}
+.dc-link::after{content:'→';transition:transform .3s}
+.demo-card:hover .dc-link::after{transform:translateX(5px)}
+
+/* ══════════════════════════════════════════
+   HOW IT WORKS
+══════════════════════════════════════════ */
+#how{background:var(--bg-primary)}
+.steps-wrap{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1.5rem;margin-top:3rem;position:relative;
+}
+.steps-wrap::before{
+  content:'';position:absolute;
+  top:39px;left:8%;right:8%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(79,70,229,.35),rgba(0,194,255,.35),transparent);
+}
+.step-c{text-align:center;position:relative}
+.step-bub{
+  width:62px;height:62px;border-radius:50%;margin:0 auto 1.3rem;
+  background:rgba(79,70,229,.09);border:1.5px solid rgba(79,70,229,.32);
+  display:flex;align-items:center;justify-content:center;font-size:1.35rem;
+  box-shadow:0 0 26px rgba(79,70,229,.14);transition:all .4s;position:relative;
+}
+.step-c:hover .step-bub{background:rgba(79,70,229,.18);box-shadow:0 0 38px rgba(79,70,229,.32);transform:scale(1.08)}
+.step-badge{
+  position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;
+  background:var(--grad-main);
+  font-family:'Jersey 15',sans-serif;font-size:.72rem;
+  display:flex;align-items:center;justify-content:center;color:#fff;
+}
+.step-c h3{font-family:'Chakra Petch',sans-serif;font-size:.9rem;font-weight:600;margin-bottom:.45rem}
+.step-c p{font-size:.78rem;color:var(--text-secondary);line-height:1.6;max-width:185px;margin:0 auto}
+
+/* ══════════════════════════════════════════
+   FOUNDERS
+══════════════════════════════════════════ */
+#founders{background:var(--bg-secondary);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.found-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.found-story h2{font-family:'Chakra Petch',sans-serif;font-size:clamp(1.7rem,2.9vw,2.35rem);font-weight:700;line-height:1.15;margin-bottom:1.25rem}
+.found-story p{color:var(--text-secondary);font-size:.93rem;line-height:1.78;margin-bottom:.85rem}
+.fquote{border-left:3px solid var(--primary);background:rgba(79,70,229,.07);border-radius:0 12px 12px 0;padding:1rem 1.3rem;margin-top:1.3rem}
+.fquote p{color:var(--text-primary)!important;font-size:.93rem!important;font-style:italic;margin:0!important}
+.fc-list{display:flex;flex-direction:column;gap:.95rem}
+.fc{
+  background:var(--bg-primary);border:1px solid var(--border);
+  border-radius:16px;padding:1.25rem;
+  display:flex;gap:.95rem;align-items:flex-start;transition:all .3s;
+}
+.fc:hover{border-color:rgba(79,70,229,.28);transform:translateX(4px)}
+.fc-av{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.fc-role{font-family:'Jersey 15',sans-serif;font-size:.8rem;color:var(--accent);letter-spacing:1px;margin-bottom:.2rem}
+.fc-nm{font-family:'Chakra Petch',sans-serif;font-size:.88rem;font-weight:600}
+.fc-bio{font-size:.76rem;color:var(--text-secondary);line-height:1.55;margin-top:.25rem}
+
+/* ══════════════════════════════════════════
+   CTA
+══════════════════════════════════════════ */
+#cta{background:var(--bg-primary);position:relative;overflow:hidden}
+#cta::before{
+  content:'';position:absolute;width:700px;height:700px;
+  background:radial-gradient(circle,rgba(79,70,229,.1) 0%,transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;
+}
+.cta-box{
+  position:relative;z-index:1;
+  background:var(--bg-secondary);border:1px solid rgba(79,70,229,.2);
+  border-radius:24px;padding:4.5rem 3rem;
+  text-align:center;max-width:780px;margin:0 auto;
+}
+.cta-box h2{font-family:'Chakra Petch',sans-serif;font-size:clamp(1.8rem,3.4vw,2.9rem);font-weight:700;margin-bottom:1rem;line-height:1.1}
+.cta-box p{color:var(--text-secondary);font-size:1rem;line-height:1.7;margin-bottom:2.2rem;max-width:480px;margin-left:auto;margin-right:auto}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+/* ══════════════════════════════════════════
+   CONTACT
+══════════════════════════════════════════ */
+#contact{background:var(--bg-secondary);border-top:1px solid var(--border)}
+.c-layout{display:grid;grid-template-columns:1fr 1.3fr;gap:4rem}
+.ci h2{font-family:'Chakra Petch',sans-serif;font-size:clamp(1.6rem,2.7vw,2.15rem);font-weight:700;margin-bottom:.85rem}
+.ci p{color:var(--text-secondary);font-size:.91rem;line-height:1.72;margin-bottom:1.75rem}
+.c-links{display:flex;flex-direction:column;gap:.85rem}
+.c-link{display:flex;align-items:center;gap:.75rem;font-size:.84rem;color:var(--text-secondary);text-decoration:none;transition:color .3s}
+.c-link:hover{color:var(--accent)}
+.c-ico{width:33px;height:33px;border-radius:8px;background:var(--bg-primary);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.form-c{display:flex;flex-direction:column;gap:.85rem}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.fg{display:flex;flex-direction:column;gap:.32rem}
+.fg label{font-size:.72rem;font-weight:500;color:var(--text-secondary);letter-spacing:.3px;font-family:'Chakra Petch',sans-serif}
+.fg input,.fg select,.fg textarea{
+  background:var(--bg-primary);border:1px solid var(--border);
+  border-radius:10px;padding:.68rem .88rem;
+  color:var(--text-primary);font-family:'DM Sans',sans-serif;
+  font-size:.87rem;outline:none;transition:border-color .3s,box-shadow .3s;
+}
+.fg input:focus,.fg select:focus,.fg textarea:focus{
+  border-color:rgba(79,70,229,.5);box-shadow:0 0 0 3px rgba(79,70,229,.09);
+}
+.fg select option{background:#121826}
+.fg textarea{resize:vertical;min-height:92px}
+.sub-btn{
+  background:var(--grad-main);color:#fff;padding:.82rem 2rem;
+  border-radius:8px;border:none;cursor:pointer;
+  font-family:'Chakra Petch',sans-serif;font-size:.88rem;font-weight:600;letter-spacing:.5px;
+  transition:all .3s;box-shadow:0 4px 24px rgba(79,70,229,.4);
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+}
+.sub-btn:hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(79,70,229,.6)}
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+footer{background:var(--bg-primary);padding:2.4rem 2.5rem;border-top:1px solid var(--border)}
+.fi{max-width:1240px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.4rem}
+.fl{font-family:'Chakra Petch',sans-serif;font-size:1.25rem;font-weight:700;background:var(--grad-main);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.f-links{display:flex;gap:1.5rem}
+.f-links a{font-size:.78rem;color:var(--text-secondary);text-decoration:none;transition:color .3s}
+.f-links a:hover{color:var(--accent)}
+.fc-copy{font-size:.74rem;color:var(--text-secondary)}
+.f-seo{max-width:1240px;margin:1.2rem auto 0;font-size:.67rem;color:rgba(148,163,184,.2);line-height:1.6}
+
+/* ══════════════════════════════════════════
+   TOAST
+══════════════════════════════════════════ */
+.toast{
+  position:fixed;bottom:2rem;right:2rem;z-index:9999;
+  background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);
+  border-radius:12px;padding:.85rem 1.25rem;
+  display:flex;align-items:center;gap:.65rem;
+  font-size:.84rem;backdrop-filter:blur(20px);color:var(--text-primary);
+  transform:translateY(18px);opacity:0;transition:all .4s;pointer-events:none;
+}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* ══════════════════════════════════════════
+   ANIMATIONS / REVEAL
+══════════════════════════════════════════ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.reveal{opacity:0;transform:translateY(28px);transition:all .8s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.rd1{transition-delay:.1s}.rd2{transition-delay:.2s}.rd3{transition-delay:.3s}.rd4{transition-delay:.4s}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media(max-width:960px){
+  .hero-content{grid-template-columns:1fr;text-align:center}
+  .hero-sub,.hero-btns,.hero-stats{justify-content:center}
+  .hero-sub{margin-left:auto;margin-right:auto}
+  .phone-wrap{justify-content:center}
+  .cat-layout{grid-template-columns:1fr}
+  .found-layout{grid-template-columns:1fr}
+  .c-layout{grid-template-columns:1fr}
+  .nav-links,.nav-cta,.theme-nav-btn{display:none}
+  .hamburger{display:flex}
+  .steps-wrap::before{display:none}
+  .frow{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  section{padding:5rem 1.5rem}
+  .phone-3d{transform-origin:center top}
+}
+
+/* Mobile menu */
+.mob-menu{
+  display:none;position:fixed;inset:0;
+  background:rgba(11,15,26,.97);backdrop-filter:blur(24px);
+  z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2rem;
+}
+[data-theme="light"] .mob-menu{background:rgba(248,250,252,.97)}
+.mob-menu.open{display:flex}
+.mob-menu a{font-family:'Chakra Petch',sans-serif;font-size:1.5rem;font-weight:600;color:var(--text-primary);text-decoration:none;transition:color .3s}
+.mob-menu a:hover{color:var(--accent)}
+.mob-close{position:absolute;top:1.5rem;right:2rem;font-size:1.3rem;cursor:pointer;background:none;border:none;color:var(--text-secondary)}
+</style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<nav id="nav">
+  <a href="#" class="nav-logo">ZYN<span style="letter-spacing:0">·</span>TELL</a>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#demo">Demo</a></li>
+    <li><a href="#founders">Founders</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-r">
+    <button class="theme-nav-btn" id="navBtn" onclick="toggleTheme()" title="Toggle theme">🌙</button>
+    <a href="#demo" class="nav-cta">Try Demo</a>
+    <div class="hamburger" onclick="openMob()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" onclick="closeMob()">✕</button>
+  <a href="#hero" onclick="closeMob()">Home</a>
+  <a href="#demo" onclick="closeMob()">Demo</a>
+  <a href="#founders" onclick="closeMob()">Founders</a>
+  <a href="#contact" onclick="closeMob()">Contact</a>
+  <a href="#demo" class="nav-cta" onclick="closeMob()">Try Demo</a>
+</div>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+
+    <!-- Left: Text -->
+    <div>
+      <div class="hero-eyebrow">AI AUTOMATION · v2.0 LIVE</div>
+      <h1 class="hero-h1">Never miss a<br/><span class="grad-text">customer again.</span></h1>
+      <p class="hero-sub">ZYNTELL captures every missed call, message and inquiry — AI responds instantly, books automatically, and converts 24/7 across every channel.</p>
+      <div class="hero-btns">
+        <a href="#demo" class="btn-p">⚡ Try Demo</a>
+        <a href="#how" class="btn-g">▶ How It Works</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="sv">98%</div><div class="sl">Response rate</div></div>
+        <div><div class="sv">3×</div><div class="sl">More bookings</div></div>
+        <div><div class="sv">24/7</div><div class="sl">Always on</div></div>
+      </div>
+    </div>
+
+    <!-- Right: 3D Phone -->
+    <div class="phone-wrap" id="phoneWrap">
+      <div class="phone-3d" id="phone3d">
+
+        <!-- Side hardware buttons -->
+        <div class="btn-silent"  title="Silent"></div>
+        <div class="btn-vol-up"  title="Volume Up"   onclick="phoneTouch(event)"></div>
+        <div class="btn-vol-dn"  title="Volume Down" onclick="phoneTouch(event)"></div>
+        <div class="btn-power"   title="Power"       onclick="powerClick()"></div>
+
+        <!-- Rear camera (visible briefly on flip) -->
+        <div class="cam-module" id="camModule">
+          <div class="cam-lens"></div>
+          <div class="cam-lens"></div>
+          <div class="cam-lens"></div>
+        </div>
+
+        <!-- Phone body -->
+        <div class="phone-body" id="phoneBody">
+
+          <!-- Screen glass -->
+          <div class="phone-screen-area" id="screenArea">
+            <div class="sc-wrap">
+
+              <!-- Status bar -->
+              <div class="sc-status">
+                <span>9:41</span>
+                <span>●●● ▲ 🔋</span>
+              </div>
+
+              <!-- Dynamic island -->
+              <div class="dyn-island" id="dynIsland">
+                <div class="di-cam"></div>
+                <div class="di-mic"></div>
+                <div class="di-txt" id="diTxt"></div>
+              </div>
+
+              <!-- Stage screens -->
+              <div class="sc-body">
+
+                <!-- Stage 1: Incoming Call -->
+                <div class="p-stage on" id="ps1">
+                  <div class="call-c">
+                    <div class="caller-ring" onclick="phoneTouch(event)">📞</div>
+                    <div class="cn">Unknown Caller</div>
+                    <div class="cnum">+91 98765 43210</div>
+                    <div class="call-acts">
+                      <button class="ca end" onclick="phoneTouch(event)">✕</button>
+                      <button class="ca ans" onclick="phoneTouch(event)">✓</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Stage 2: Missed + AI Activate -->
+                <div class="p-stage" id="ps2">
+                  <div class="miss-c">
+                    <div class="notif-c" onclick="phoneTouch(event)">
+                      <span class="ni">📵</span>
+                      <div class="nb"><strong>MISSED CALL · JUST NOW</strong>+91 98765 43210 tried to reach you</div>
+                    </div>
+                    <div class="arr">↓</div>
+                    <div class="ai-act">
+                      <div class="ai-lbl">ZYNTELL AI ACTIVATING</div>
+                      <div class="ai-sub">Responding in 2 seconds...</div>
+                      <div class="ai-bar"><div class="ai-prog"></div></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Stage 3: Chat -->
+                <div class="p-stage" id="ps3">
+                  <div class="chat-c">
+                    <div class="chat-top">
+                      <div class="b-av">🤖</div>
+                      <div>
+                        <div class="b-nm">Zyntell AI</div>
+                        <div style="font-family:'Handjet',sans-serif;font-size:.58rem;color:rgba(230,234,242,.35);letter-spacing:1px">AUTOMATED · LIVE</div>
+                      </div>
+                      <div class="b-on"></div>
+                    </div>
+                    <div class="msgs">
+                      <div class="m bot">Hi 👋 We saw you tried calling! How can we help?</div>
+                      <div class="m usr">I need to book an appointment</div>
+                      <div id="chatTyping">
+                        <div class="typing-wrap"><div class="td"></div><div class="td"></div><div class="td"></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Stage 4: Confirmed -->
+                <div class="p-stage" id="ps4">
+                  <div class="confirm-c">
+                    <div class="conf-card">
+                      <span class="ck">✅</span>
+                      <h4>Booking Confirmed!</h4>
+                      <p>Auto-booked by ZYNTELL AI</p>
+                    </div>
+                    <div class="dr"><span>📅</span><span>Tomorrow, 10:30 AM</span></div>
+                    <div class="dr"><span>📍</span><span>City Clinic, Sector 12</span></div>
+                    <div class="dr"><span>💬</span><span>Confirmation via WhatsApp</span></div>
+                    <div class="dr"><span>👤</span><span>Dr. Aisha · General Physician</span></div>
+                    <div class="zyn-tag">🎯 CUSTOMER CAPTURED BY ZYNTELL</div>
+                  </div>
+                </div>
+
+              </div><!-- /sc-body -->
+
+              <!-- Stage dots -->
+              <div class="sdots">
+                <div class="sd on" id="d1"></div>
+                <div class="sd" id="d2"></div>
+                <div class="sd" id="d3"></div>
+                <div class="sd" id="d4"></div>
+              </div>
+
+              <!-- Theme toggle inside phone -->
+              <div class="phone-toggle" id="phoneToggle" onclick="toggleTheme()" title="Switch light/dark">
+                <div class="toggle-knob" id="tKnob"><span id="tIcon">🌙</span></div>
+              </div>
+
+            </div><!-- /sc-wrap -->
+          </div><!-- /phone-screen-area -->
+
+          <!-- Bottom speaker / USB -->
+          <div class="ph-bottom">
+            <div class="sp-hole"></div><div class="sp-hole"></div>
+            <div class="connector"></div>
+            <div class="sp-hole"></div><div class="sp-hole"></div><div class="sp-hole"></div>
+            <div class="connector" style="width:4px;height:4px;border-radius:50%"></div>
+            <div class="sp-hole"></div><div class="sp-hole"></div>
+          </div>
+
+        </div><!-- /phone-body -->
+
+      </div><!-- /phone-3d -->
+    </div><!-- /phone-wrap -->
+
+  </div>
+</section>
+
+<!-- ══ PROBLEM ══ -->
+<section id="problem">
+  <div class="container">
+    <div class="reveal">
+      <div class="s-tag">THE PROBLEM</div>
+      <h2 class="s-title">Every missed call is<br/><span class="grad-text">lost revenue.</span></h2>
+      <p class="s-sub">Businesses lose thousands of potential customers every week — not because they're bad, but because they're human. ZYNTELL fixes that.</p>
+    </div>
+    <div class="prob-grid">
+      <div class="prob-card reveal rd1">
+        <span class="pi">📵</span>
+        <h3>Missed Customer Calls</h3>
+        <p>62% of customers who call and can't reach someone will move to a competitor. Every unanswered ring costs you a real person.</p>
+        <p class="pstat">▲ 62% OF MISSED CALLS NEVER CALL BACK</p>
+      </div>
+      <div class="prob-card reveal rd2">
+        <span class="pi">🔕</span>
+        <h3>Lost Leads & Inquiries</h3>
+        <p>Messages go unread for hours. WhatsApp, Instagram, Google — customers reach out everywhere, but follow-up is slow or never happens.</p>
+        <p class="pstat">▲ AVG. RESPONSE TIME: 12 HOURS</p>
+      </div>
+      <div class="prob-card reveal rd3">
+        <span class="pi">🔄</span>
+        <h3>Poor Follow-Up Systems</h3>
+        <p>Your team is busy. No one chases every lead, sends every reminder, and re-engages every cold contact. Customers slip through.</p>
+        <p class="pstat">▲ 80% OF SALES NEED 5+ FOLLOW-UPS</p>
+      </div>
+      <div class="prob-card reveal rd4">
+        <span class="pi">📋</span>
+        <h3>Manual Booking Chaos</h3>
+        <p>Back-and-forth scheduling, double bookings, no-shows — manual systems create friction that costs customers and staff time daily.</p>
+        <p class="pstat">▲ 40% NO-SHOW RATE WITHOUT REMINDERS</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CATEGORIES ══ -->
+<section id="categories">
+  <div class="container">
+    <div class="reveal">
+      <div class="s-tag">INDUSTRIES</div>
+      <h2 class="s-title">Built for your<br/><span class="grad-text">industry.</span></h2>
+      <p class="s-sub">ZYNTELL adapts to how your business actually works — with industry-specific AI trained on real customer conversations.</p>
+    </div>
+    <div class="cat-layout reveal">
+      <div class="cat-tabs">
+        <div class="cat-tab on" onclick="switchCat(event,'clinic')">
+          <span class="cte">🏥</span>
+          <div class="cti"><h3>Clinics & Healthcare</h3><p>Appointment booking, reminders, follow-ups</p></div>
+        </div>
+        <div class="cat-tab" onclick="switchCat(event,'restaurant')">
+          <span class="cte">🍽️</span>
+          <div class="cti"><h3>Restaurants & Cafés</h3><p>Reservations, orders, wait times</p></div>
+        </div>
+        <div class="cat-tab" onclick="switchCat(event,'realestate')">
+          <span class="cte">🏠</span>
+          <div class="cti"><h3>Real Estate</h3><p>Lead capture, site visits, follow-ups</p></div>
+        </div>
+        <div class="cat-tab" onclick="switchCat(event,'services')">
+          <span class="cte">🛠️</span>
+          <div class="cti"><h3>Service Businesses</h3><p>Quotes, scheduling, customer support</p></div>
+        </div>
+      </div>
+      <div class="cat-prev">
+        <div class="pv-panel on" id="pv-clinic">
+          <div class="pv-head"><span class="pv-em">🏥</span><div><h3>Clinic Automation</h3><p>Capture patients 24/7 — even at 2 AM</p></div></div>
+          <div class="pv-feats">
+            <div class="pv-feat">Auto-respond to missed calls instantly</div>
+            <div class="pv-feat">Book appointments via WhatsApp AI</div>
+            <div class="pv-feat">Send automated reminders & reduce no-shows</div>
+            <div class="pv-feat">Collect patient details before arrival</div>
+            <div class="pv-feat">Follow up after every visit automatically</div>
+          </div>
+          <div class="pv-metric"><div><div class="mv">40%</div><div class="ml">fewer no-shows</div></div><div style="text-align:right"><div class="mv">3×</div><div class="ml">more bookings</div></div></div>
+        </div>
+        <div class="pv-panel" id="pv-restaurant">
+          <div class="pv-head"><span class="pv-em">🍽️</span><div><h3>Restaurant Automation</h3><p>Fill every table, zero phone tag</p></div></div>
+          <div class="pv-feats">
+            <div class="pv-feat">Instant table reservation via WhatsApp</div>
+            <div class="pv-feat">AI handles peak-hour call overflow</div>
+            <div class="pv-feat">Send daily specials & menu updates</div>
+            <div class="pv-feat">Manage pre-orders and event bookings</div>
+            <div class="pv-feat">Automated review follow-up campaigns</div>
+          </div>
+          <div class="pv-metric"><div><div class="mv">85%</div><div class="ml">calls converted</div></div><div style="text-align:right"><div class="mv">2hr</div><div class="ml">saved daily</div></div></div>
+        </div>
+        <div class="pv-panel" id="pv-realestate">
+          <div class="pv-head"><span class="pv-em">🏠</span><div><h3>Real Estate Automation</h3><p>Qualify leads while you sleep</p></div></div>
+          <div class="pv-feats">
+            <div class="pv-feat">Capture leads from ads & portals 24/7</div>
+            <div class="pv-feat">Auto-qualify buyers and renters with AI</div>
+            <div class="pv-feat">Schedule site visits automatically</div>
+            <div class="pv-feat">Send property brochures instantly</div>
+            <div class="pv-feat">Multi-stage nurture sequences</div>
+          </div>
+          <div class="pv-metric"><div><div class="mv">5×</div><div class="ml">lead response speed</div></div><div style="text-align:right"><div class="mv">70%</div><div class="ml">qualify rate</div></div></div>
+        </div>
+        <div class="pv-panel" id="pv-services">
+          <div class="pv-head"><span class="pv-em">🛠️</span><div><h3>Service Business Automation</h3><p>Quote, schedule, deliver — automated</p></div></div>
+          <div class="pv-feats">
+            <div class="pv-feat">Instant quote responses to every inquiry</div>
+            <div class="pv-feat">Smart scheduling with tech availability</div>
+            <div class="pv-feat">Automated job reminders and updates</div>
+            <div class="pv-feat">Post-service review collection</div>
+            <div class="pv-feat">Recurring job scheduling & loyalty</div>
+          </div>
+          <div class="pv-metric"><div><div class="mv">60%</div><div class="ml">faster quotes</div></div><div style="text-align:right"><div class="mv">90%</div><div class="ml">satisfaction</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DEMO ══ -->
+<section id="demo">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <div class="s-tag">LIVE DEMOS</div>
+      <h2 class="s-title" style="text-align:center">See ZYNTELL in<br/><span class="grad-text">action.</span></h2>
+      <p class="s-sub" style="margin:.9rem auto 0">Try our industry bots live. See exactly what your customers experience.</p>
+    </div>
+    <div class="demo-grid">
+      <a href="#" class="demo-card reveal rd1" onclick="return demoClick('CLINIC_BOT')">
+        <div class="dc-ico" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25)">🏥</div>
+        <h3>CLINIC_BOT</h3>
+        <div class="bot-chip">AI :: HEALTH AUTOMATION</div>
+        <p>Patients book appointments, receive confirmations and get reminders — all via WhatsApp AI, zero staff needed.</p>
+        <span class="dc-link">LAUNCH DEMO</span>
+      </a>
+      <a href="#" class="demo-card reveal rd2" onclick="return demoClick('RESTO_BOT')">
+        <div class="dc-ico" style="background:rgba(249,115,22,.12);border:1px solid rgba(249,115,22,.25)">🍽️</div>
+        <h3>RESTO_BOT</h3>
+        <div class="bot-chip">AI :: TABLE RESERVATIONS</div>
+        <p>Diners book tables, check availability and get updates — without a single staff interaction during peak hours.</p>
+        <span class="dc-link">LAUNCH DEMO</span>
+      </a>
+      <a href="#" class="demo-card reveal rd3" onclick="return demoClick('REALTY_BOT')">
+        <div class="dc-ico" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25)">🏠</div>
+        <h3>REALTY_BOT</h3>
+        <div class="bot-chip">AI :: LEAD QUALIFIER</div>
+        <p>Leads qualified, property details shared and site visits booked — automatically at 2 AM while you sleep.</p>
+        <span class="dc-link">LAUNCH DEMO</span>
+      </a>
+      <a href="#" class="demo-card reveal rd4" onclick="return demoClick('SERVICE_BOT')">
+        <div class="dc-ico" style="background:rgba(168,85,247,.12);border:1px solid rgba(168,85,247,.25)">🛠️</div>
+        <h3>SERVICE_BOT</h3>
+        <div class="bot-chip">AI :: JOB SCHEDULER</div>
+        <p>Quotes sent, jobs scheduled, reviews collected — while your team focuses on delivering actual service.</p>
+        <span class="dc-link">LAUNCH DEMO</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW IT WORKS ══ -->
+<section id="how">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <div class="s-tag">PROCESS</div>
+      <h2 class="s-title" style="text-align:center">How <span class="grad-text">ZYNTELL</span> works.</h2>
+      <p class="s-sub" style="margin:.9rem auto 0">Four simple steps. Zero manual effort. Customers captured while you run your business.</p>
+    </div>
+    <div class="steps-wrap">
+      <div class="step-c reveal rd1">
+        <div class="step-bub"><span>📲</span><div class="step-badge">1</div></div>
+        <h3>Customer Reaches Out</h3>
+        <p>A customer calls, messages, or fills a form on any channel, at any hour.</p>
+      </div>
+      <div class="step-c reveal rd2">
+        <div class="step-bub"><span>🤖</span><div class="step-badge">2</div></div>
+        <h3>AI Responds Instantly</h3>
+        <p>ZYNTELL AI replies within seconds — understanding intent and guiding the conversation.</p>
+      </div>
+      <div class="step-c reveal rd3">
+        <div class="step-bub"><span>📅</span><div class="step-badge">3</div></div>
+        <h3>Booking Confirmed</h3>
+        <p>The AI books, sends confirmation, and schedules reminders — all automatically.</p>
+      </div>
+      <div class="step-c reveal rd4">
+        <div class="step-bub"><span>🎯</span><div class="step-badge">4</div></div>
+        <h3>Business Gets Customer</h3>
+        <p>You receive a fully qualified, confirmed booking with all details and contact info.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOUNDERS ══ -->
+<section id="founders">
+  <div class="container">
+    <div class="found-layout">
+      <div class="found-story reveal">
+        <div class="s-tag">OUR STORY</div>
+        <h2>We built ZYNTELL<br/>because we <span class="grad-text">felt the pain.</span></h2>
+        <p>We watched small business owners — clinics, salons, restaurants — work 12-hour days, only to lose customers while they slept. A missed call at 9 PM meant a lost booking forever.</p>
+        <p>We knew AI could fix this. Not the complicated, expensive enterprise kind — but something simple, powerful, and built for the businesses that need it most.</p>
+        <p>ZYNTELL was born from that frustration. One mission: make sure every business can respond like a Fortune 500 company.</p>
+        <div class="fquote"><p>"Every missed call is a missed life moment for someone. We built ZYNTELL to make sure that moment becomes a booking, not a loss."</p></div>
+      </div>
+      <div class="fc-list reveal rd2">
+        <div class="fc">
+          <div class="fc-av" style="background:linear-gradient(135deg,#4F46E5,#2563EB)">👨‍💻</div>
+          <div><div class="fc-role">CEO &amp; CO-FOUNDER</div><div class="fc-nm">Aryan Mehta</div><div class="fc-bio">Former product lead at HealthTech. Obsessed with turning complex AI into tools anyone can use. Built ZYNTELL after watching his family's clinic lose patients to missed calls.</div></div>
+        </div>
+        <div class="fc">
+          <div class="fc-av" style="background:linear-gradient(135deg,#00C2FF,#4F46E5)">👩‍🎨</div>
+          <div><div class="fc-role">CPO &amp; CO-FOUNDER</div><div class="fc-nm">Priya Sharma</div><div class="fc-bio">UX strategist with 6 years in conversational design. Believes AI should feel human. Designed every ZYNTELL bot flow to feel like talking to a brilliant, helpful person.</div></div>
+        </div>
+        <div class="fc">
+          <div class="fc-av" style="background:linear-gradient(135deg,#F59E0B,#EF4444)">👨‍🔬</div>
+          <div><div class="fc-role">CTO &amp; CO-FOUNDER</div><div class="fc-nm">Rohan Kapoor</div><div class="fc-bio">AI/ML engineer who built automation at scale. Architected ZYNTELL's multi-model response engine that handles 10,000+ concurrent conversations.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-box reveal">
+      <div class="s-tag" style="margin:0 auto 1.3rem;display:table">START FREE</div>
+      <h2>Start capturing customers<br/><span class="grad-text">today.</span></h2>
+      <p>Set up in under 10 minutes. No code required. See ZYNTELL working for your business within 24 hours.</p>
+      <div class="cta-btns">
+        <a href="#demo" class="btn-p">⚡ Try Demo Free</a>
+        <a href="#contact" class="btn-g">📅 Book a Demo Call</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <div class="container">
+    <div class="c-layout">
+      <div class="ci reveal">
+        <div class="s-tag">CONTACT</div>
+        <h2>Let's build your<br/><span class="grad-text">AI system.</span></h2>
+        <p>Tell us about your business and we'll set up a custom ZYNTELL demo tailored to your needs. Free, no obligation.</p>
+        <div class="c-links">
+          <a href="mailto:hello@zyntell.ai" class="c-link"><span class="c-ico">📧</span>hello@zyntell.ai</a>
+          <a href="https://wa.me/919876543210" class="c-link"><span class="c-ico">💬</span>WhatsApp: +91 98765 43210</a>
+          <a href="#" class="c-link"><span class="c-ico">📍</span>Hyderabad &amp; Mumbai, India</a>
+        </div>
+      </div>
+      <div class="reveal rd2">
+        <form class="form-c" onsubmit="handleForm(event)">
+          <div class="frow">
+            <div class="fg"><label>YOUR NAME</label><input type="text" placeholder="Rahul Sharma" required/></div>
+            <div class="fg"><label>PHONE / WHATSAPP</label><input type="tel" placeholder="+91 98765 43210" required/></div>
+          </div>
+          <div class="fg">
+            <label>BUSINESS TYPE</label>
+            <select required>
+              <option value="" disabled selected>Select your industry</option>
+              <option>Clinic / Healthcare</option>
+              <option>Restaurant / Café</option>
+              <option>Real Estate</option>
+              <option>Salon / Spa</option>
+              <option>Service Business</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>TELL US ABOUT YOUR BUSINESS</label>
+            <textarea placeholder="We're a dental clinic in Hyderabad getting ~50 calls/day but missing half after hours..."></textarea>
+          </div>
+          <button type="submit" class="sub-btn">🚀 Get My Free Demo Setup</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="fi">
+    <div class="fl">ZYNTELL</div>
+    <div class="f-links">
+      <a href="#hero">Home</a><a href="#demo">Demo</a>
+      <a href="#founders">About</a><a href="#contact">Contact</a><a href="#">Privacy</a>
+    </div>
+    <div class="fc-copy">© 2025 ZYNTELL. All rights reserved.</div>
+  </div>
+  <p class="f-seo">ZYNTELL — AI automation for businesses | customer booking automation | WhatsApp automation for clinics | missed call automation system | AI chatbot booking system | local business automation | customer engagement automation | AI booking system India</p>
+</footer>
+
+<!-- Toast -->
+<div class="toast" id="toast"><span>✅</span><span id="toastTxt"></span></div>
+
+<!-- ══════════════════════════════════════
+     THREE.JS 3D BACKGROUND SCENE
+══════════════════════════════════════ -->
+<script>
+(function(){
+  const canvas = document.getElementById('hero-canvas');
+  const renderer = new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setClearColor(0,0);
+  const scene = new THREE.Scene();
+  const cam = new THREE.PerspectiveCamera(70,1,0.1,1000);
+  cam.position.z = 5.5;
+
+  function resize(){
+    const p = canvas.parentElement;
+    renderer.setSize(p.clientWidth,p.clientHeight);
+    cam.aspect = p.clientWidth/p.clientHeight;
+    cam.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize',resize);
+
+  // Particles
+  const N=2200, pos=new Float32Array(N*3), col=new Float32Array(N*3);
+  for(let i=0;i<N;i++){
+    pos[i*3]=(Math.random()-.5)*22;
+    pos[i*3+1]=(Math.random()-.5)*22;
+    pos[i*3+2]=(Math.random()-.5)*12;
+    const t=(pos[i*3+1]+11)/22;
+    col[i*3]=.31-.05*t; col[i*3+1]=.27+.5*t; col[i*3+2]=.9+.1*t;
+  }
+  const pg=new THREE.BufferGeometry();
+  pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  pg.setAttribute('color',new THREE.BufferAttribute(col,3));
+  const pts=new THREE.Points(pg,new THREE.PointsMaterial({size:.034,vertexColors:true,transparent:true,opacity:.5,sizeAttenuation:true}));
+  scene.add(pts);
+
+  // Neural lines
+  const nd=[];
+  for(let i=0;i<70;i++) nd.push(new THREE.Vector3((Math.random()-.5)*18,(Math.random()-.5)*18,(Math.random()-.5)*5));
+  const lm=new THREE.LineBasicMaterial({color:0x4F46E5,transparent:true,opacity:.065});
+  nd.forEach((a,i)=>nd.slice(i+1).forEach(b=>{ if(a.distanceTo(b)<4.3){ const g=new THREE.BufferGeometry().setFromPoints([a,b]); scene.add(new THREE.Line(g,lm)); } }));
+
+  // Orbs
+  const orbs=[];
+  for(let i=0;i<6;i++){
+    const r=.12+Math.random()*.22,g=new THREE.SphereGeometry(r,14,14),
+          m=new THREE.MeshBasicMaterial({color:i%2===0?0x4F46E5:0x00C2FF,transparent:true,opacity:.1}),
+          o=new THREE.Mesh(g,m);
+    o.position.set((Math.random()-.5)*14,(Math.random()-.5)*9,(Math.random()-.5)*3-2);
+    scene.add(o);
+    orbs.push({mesh:o,sp:.3+Math.random()*.6,off:Math.random()*Math.PI*2,by:o.position.y});
+  }
+
+  let mx=0,my=0;
+  document.addEventListener('mousemove',e=>{
+    mx=(e.clientX/innerWidth-.5)*2;
+    my=-(e.clientY/innerHeight-.5)*2;
+  });
+
+  let t=0;
+  (function loop(){
+    requestAnimationFrame(loop);
+    t+=.003;
+    pts.rotation.y=t*.04; pts.rotation.x=t*.014;
+    cam.position.x+=(mx*1.4-cam.position.x)*.027;
+    cam.position.y+=(my*.9-cam.position.y)*.027;
+    orbs.forEach(o=>{
+      o.mesh.position.y=o.by+Math.sin(t*o.sp+o.off)*.52;
+      o.mesh.material.opacity=.07+.07*Math.sin(t*1.8+o.off);
+    });
+    renderer.render(scene,cam);
+  })();
+})();
+</script>
+
+<!-- ══════════════════════════════════════
+     PHONE 3D TILT + TOUCH + FLIP
+══════════════════════════════════════ -->
+<script>
+const phone3d = document.getElementById('phone3d');
+const phoneWrap = document.getElementById('phoneWrap');
+const phoneBody = document.getElementById('phoneBody');
+let tx=0,ty=0,tgtX=0,tgtY=0,hovered=false;
+
+phoneWrap.addEventListener('mousemove', e => {
+  const r = phone3d.getBoundingClientRect();
+  const dx = (e.clientX - r.left - r.width/2) / (r.width/2);
+  const dy = (e.clientY - r.top  - r.height/2)/ (r.height/2);
+  tgtX = -dy * 18;
+  tgtY =  dx * 14;
+  hovered = true;
+
+  // Ripple when hovering over the screen area
+  const sa = document.getElementById('screenArea');
+  const sr = sa.getBoundingClientRect();
+  if(e.clientX>sr.left && e.clientX<sr.right && e.clientY>sr.top && e.clientY<sr.bottom){
+    if(Math.random() > 0.85) spawnRipple(e.clientX-sr.left, e.clientY-sr.top);
+  }
+});
+phoneWrap.addEventListener('mouseleave', ()=>{ tgtX=0; tgtY=0; hovered=false; });
+document.getElementById('screenArea').addEventListener('click', e=>{
+  const r = document.getElementById('screenArea').getBoundingClientRect();
+  spawnRipple(e.clientX-r.left, e.clientY-r.top);
+});
+
+// Smooth tilt loop
+(function tilt(){
+  requestAnimationFrame(tilt);
+  tx += (tgtX-tx)*.1;
+  ty += (tgtY-ty)*.1;
+  const sc = hovered ? 1.025 : 1;
+  phone3d.style.transform = `perspective(1200px) rotateX(${tx}deg) rotateY(${ty}deg) scale(${sc})`;
+  phoneBody.style.boxShadow = `
+    inset 0 1px 0 rgba(255,255,255,.13),
+    inset 0 -1px 0 rgba(0,0,0,.45),
+    0 ${35+tx*.8}px ${90+Math.abs(tx)*1.3}px rgba(0,0,0,.7),
+    0 0 ${55+Math.abs(tx+ty)}px rgba(79,70,229,${.14+Math.abs(tx+ty)*.003})`;
+})();
+
+function spawnRipple(x,y){
+  const r=document.createElement('div');
+  r.className='t-ripple';
+  r.style.left=x+'px'; r.style.top=y+'px';
+  document.getElementById('screenArea').appendChild(r);
+  setTimeout(()=>r.remove(), 580);
+}
+function phoneTouch(e){
+  const sa=document.getElementById('screenArea');
+  const sr=sa.getBoundingClientRect();
+  spawnRipple(e.clientX-sr.left, e.clientY-sr.top);
+}
+
+// Power button = brief flip to reveal rear camera
+function powerClick(){
+  phone3d.style.transition='transform .35s cubic-bezier(.34,1.56,.64,1)';
+  phone3d.style.transform='perspective(1200px) rotateY(40deg) scale(1.04)';
+  document.getElementById('camModule').style.opacity='1';
+  setTimeout(()=>{
+    phone3d.style.transform=`perspective(1200px) rotateX(${tx}deg) rotateY(${ty}deg) scale(${hovered?1.025:1})`;
+    phone3d.style.transition='';
+    setTimeout(()=>document.getElementById('camModule').style.opacity='0',300);
+  }, 900);
+}
+
+// Volume buttons — press-in on click
+document.querySelector('.btn-vol-up').addEventListener('mousedown',function(){
+  this.style.transform='translateX(-1px) scaleX(.45)';
+});
+document.querySelector('.btn-vol-up').addEventListener('mouseup',function(){
+  this.style.transform='';
+});
+document.querySelector('.btn-vol-dn').addEventListener('mousedown',function(){
+  this.style.transform='translateX(-1px) scaleX(.45)';
+});
+document.querySelector('.btn-vol-dn').addEventListener('mouseup',function(){
+  this.style.transform='';
+});
+</script>
+
+<!-- ══════════════════════════════════════
+     PHONE STAGE ANIMATION
+══════════════════════════════════════ -->
+<script>
+let cur=1, paused=false, timer;
+const diLabels=['INCOMING CALL','AI ACTIVATING','CHAT OPEN','BOOKING ✓'];
+
+function goStage(n){
+  [1,2,3,4].forEach(i=>{
+    document.getElementById('ps'+i)?.classList.toggle('on', i===n);
+    document.getElementById('d'+i)?.classList.toggle('on', i===n);
+  });
+  cur=n;
+
+  // Expand dynamic island
+  const di=document.getElementById('dynIsland');
+  const dt=document.getElementById('diTxt');
+  di.classList.add('expand');
+  dt.textContent=diLabels[n-1];
+  setTimeout(()=>{ di.classList.remove('expand'); dt.textContent=''; }, 2400);
+
+  // Stage 3 chat reply
+  if(n===3){
+    setTimeout(()=>{
+      const ct=document.getElementById('chatTyping');
+      if(ct) ct.innerHTML='<div class="m bot">Sure! What date works best for you? 📅</div>';
+    }, 2100);
+  }
+  // Reset chat on loop
+  if(n===1){
+    const ct=document.getElementById('chatTyping');
+    if(ct) ct.innerHTML='<div class="typing-wrap"><div class="td"></div><div class="td"></div><div class="td"></div></div>';
+  }
+}
+
+function advance(){ if(!paused) goStage(cur>=4?1:cur+1); }
+function startLoop(){ clearInterval(timer); timer=setInterval(advance,3200); }
+phoneWrap.addEventListener('mouseenter',()=>{ paused=true; clearInterval(timer); });
+phoneWrap.addEventListener('mouseleave',()=>{ paused=false; startLoop(); });
+startLoop();
+</script>
+
+<!-- ══════════════════════════════════════
+     THEME TOGGLE
+══════════════════════════════════════ -->
+<script>
+function toggleTheme(){
+  const dark = document.documentElement.getAttribute('data-theme')==='dark';
+  document.documentElement.setAttribute('data-theme', dark?'light':'dark');
+  const ico = dark ? '☀️' : '🌙';
+  document.getElementById('tIcon').textContent = ico;
+  document.getElementById('navBtn').textContent = ico;
+}
+</script>
+
+<!-- ══════════════════════════════════════
+     CATEGORY SWITCH
+══════════════════════════════════════ -->
+<script>
+function switchCat(e,id){
+  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.pv-panel').forEach(p=>p.classList.remove('on'));
+  e.currentTarget.classList.add('on');
+  document.getElementById('pv-'+id)?.classList.add('on');
+}
+</script>
+
+<!-- ══════════════════════════════════════
+     SCROLL / REVEAL / NAV / MISC
+══════════════════════════════════════ -->
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>50));
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.13});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+function openMob(){document.getElementById('mobMenu').classList.add('open')}
+function closeMob(){document.getElementById('mobMenu').classList.remove('open')}
+function handleForm(e){
+  e.preventDefault();
+  showToast('🎉 Received! Our team will WhatsApp you within 2 hours.');
+  e.target.reset();
+}
+function demoClick(n){
+  showToast('🚀 Opening '+n+' — live demo loading...');
+  return false;
+}
+function showToast(msg){
+  const t=document.getElementById('toast');
+  document.getElementById('toastTxt').textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3800);
+}
+</script>
+
+</body>
+</html>
