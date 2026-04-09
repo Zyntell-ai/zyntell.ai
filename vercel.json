@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "zyntell.in"
+        }
+      ],
+      "destination": "https://www.zyntell.in/$1",
+      "permanent": true
+    }
+  ]
+}
