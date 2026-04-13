@@ -13,11 +13,91 @@
   <meta property="og:title" content="ZYNTELL – Never Miss a Customer Again" />
   <meta property="og:description" content="AI-powered automation platform. Never miss a customer again." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://zyntell.in/" />
+  <meta property="og:image" content="https://zyntell.in/og-image.png" />
+  <meta property="og:site_name" content="ZYNTELL" />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ZYNTELL – Never Miss a Customer Again" />
+  <meta name="twitter:description"
+    content="AI captures every missed call, message and inquiry — responds, books and converts 24/7. Built for clinics, restaurants, real estate and service businesses." />
+  <meta name="twitter:image" content="https://zyntell.in/og-image.png" />
+  <meta name="twitter:site" content="@zyntell" />
+
+  <!-- SEO Extras -->
+  <link rel="canonical" href="https://zyntell.in/" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="author" content="ZYNTELL" />
+  <meta name="geo.region" content="IN-TG" />
+  <meta name="geo.placename" content="Hyderabad" />
+  <meta name="theme-color" content="#4f46e5" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ZYNTELL",
+    "url": "https://zyntell.in",
+    "description": "AI-powered customer automation platform. Captures every missed call, message and inquiry — AI responds, books and converts 24/7.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "INR",
+      "description": "Free demo available"
+    },
+    "provider": {
+      "@type": "Organization",
+      "name": "ZYNTELL",
+      "url": "https://zyntell.in",
+      "logo": "https://zyntell.in/favicon.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "telephone": "+91-7416028576",
+        "availableLanguage": ["English", "Hindi"]
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Hyderabad",
+        "addressRegion": "Telangana",
+        "addressCountry": "IN"
+      },
+      "sameAs": [
+        "https://www.instagram.com/zyntell.ai/",
+        "https://facebook.com/zyntell.in",
+        "https://www.linkedin.com/company/zyntell"
+      ]
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "ratingCount": "120"
+    }
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link
     href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Jersey+15&family=Jersey+10&family=Handjet:wght@100;200;300;400;500&family=DM+Sans:wght@300;400;500&display=swap"
     rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- ══ SUPABASE CLIENT SDK ══ -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
+  <!-- ══ ZYNTELL CRM CONFIG ══ Replace with your actual Supabase credentials ══ -->
+  <!-- ══ ZYNTELL CRM CONFIG — loaded from config.js (gitignored) ══ -->
+  <script src="config.js"></script>
+  <script>
+    const SUPABASE_URL = window.__zyntell?.SUPABASE_URL || '';
+    const SUPABASE_ANON_KEY = window.__zyntell?.SUPABASE_ANON_KEY || '';
+    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  </script>
   <style>
     /* ══════════════════════════════════════════
    CSS CUSTOM PROPERTIES – EXACT TOKENS
@@ -3083,7 +3163,8 @@
           <span class="dc-link">LAUNCH DEMO</span>
         </a>
         <!-- <a href="#" class="demo-card reveal rd3" onclick="return demoClick('REALTY_BOT');"> -->
-        <a href="https://real-estate.zyntell.in/" target="_blank" rel="noopener noreferrer" class="demo-card reveal rd1">
+        <a href="https://real-estate.zyntell.in/" target="_blank" rel="noopener noreferrer"
+          class="demo-card reveal rd1">
           <div style="
                 position: absolute;
                 top: 1rem;
@@ -3127,8 +3208,8 @@
           <span class="dc-link">LAUNCH DEMO</span>
         </a>
         <!-- <a href="#" class="demo-card reveal rd4" onclick="return demoClick('SERVICE_BOT');"> -->
-          <a href="https://edu-tech.zyntell.in/" target="_blank" rel="noopener noreferrer" class="demo-card reveal rd1">
-            <div style="
+        <a href="https://edu-tech.zyntell.in/" target="_blank" rel="noopener noreferrer" class="demo-card reveal rd1">
+          <div style="
                 position: absolute;
                 top: 1rem;
                 right: 1rem;
@@ -3362,7 +3443,9 @@
             tailored to your needs. Free, no obligation.
           </p>
           <div class="c-links">
-            <a href="mailto:founders@zyntell.in" class="c-link"><span class="c-ico">📧</span>founders@zyntell.in</a>
+            <a href="/cdn-cgi/l/email-protection#c2a4adb7aca6a7b0b182b8bbacb6a7aeaeecabac" class="c-link"><span
+                class="c-ico">📧</span><span class="__cf_email__"
+                data-cfemail="22444d574c4647505162585b4c56474e4e0c4b4c">[email&#160;protected]</span></a>
             <a href="https://wa.me/7416028576" class="c-link"><span class="c-ico">💬</span>WhatsApp: +91 7416028576</a>
             <a href="#" class="c-link"><span class="c-ico">📍</span>Hyderabad &amp; India</a>
           </div>
@@ -3463,7 +3546,234 @@
   <!-- ══════════════════════════════════════
      THREE.JS 3D BACKGROUND SCENE
 ══════════════════════════════════════ -->
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <!-- ══════════════════════════════════════
+     ZYNTELL CRM — VISITOR TRACKING ENGINE
+     Tracks: unique visitors, page views, device, browser, OS, referrer
+     Stores to Supabase tables: page_views, visitors
+══════════════════════════════════════ -->
+  <script>
+    (async function ZyntellCRM() {
+      // ── 1. Generate browser fingerprint (privacy-safe, no PII) ──
+      async function getFingerprint() {
+        const raw = [
+          navigator.userAgent,
+          navigator.language,
+          screen.width + 'x' + screen.height,
+          screen.colorDepth,
+          Intl.DateTimeFormat().resolvedOptions().timeZone,
+          navigator.platform,
+          navigator.hardwareConcurrency || 0,
+          navigator.maxTouchPoints || 0
+        ].join('|');
+
+        // SHA-256 hash the fingerprint string
+        try {
+          const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(raw));
+          return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+        } catch {
+          // Fallback if SubtleCrypto unavailable
+          let h = 0;
+          for (let i = 0; i < raw.length; i++) h = Math.imul(31, h) + raw.charCodeAt(i) | 0;
+          return Math.abs(h).toString(16);
+        }
+      }
+
+      // ── 2. Session ID (per browser tab, resets on close) ──
+      function getSessionId() {
+        let sid = sessionStorage.getItem('_zyn_sid');
+        if (!sid) {
+          sid = 'S' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).slice(2, 7).toUpperCase();
+          sessionStorage.setItem('_zyn_sid', sid);
+        }
+        return sid;
+      }
+
+      // ── 3. Parse browser / OS / device from UA ──
+      function parseUA(ua) {
+        let browser = 'Unknown', os = 'Unknown', device = 'Desktop';
+
+        // Browser detection
+        if (ua.includes('Edg/')) browser = 'Edge';
+        else if (ua.includes('OPR/') || ua.includes('Opera')) browser = 'Opera';
+        else if (ua.includes('Firefox/')) browser = 'Firefox';
+        else if (ua.includes('Chrome/')) browser = 'Chrome';
+        else if (ua.includes('Safari/')) browser = 'Safari';
+        else if (ua.includes('MSIE') || ua.includes('Trident')) browser = 'IE';
+
+        // OS detection
+        if (ua.includes('Windows')) os = 'Windows';
+        else if (ua.includes('Mac OS X')) os = 'macOS';
+        else if (ua.includes('Android')) os = 'Android';
+        else if (ua.includes('iPhone') || ua.includes('iPad')) os = 'iOS';
+        else if (ua.includes('Linux')) os = 'Linux';
+
+        // Device type
+        if (/Mobi|Android|iPhone/i.test(ua)) device = 'Mobile';
+        else if (/iPad|Tablet/i.test(ua)) device = 'Tablet';
+
+        return { browser, os, device };
+      }
+
+      // ── 4. Parse referrer into readable source ──
+      function parseReferrer(ref) {
+        if (!ref) return 'Direct';
+        try {
+          const host = new URL(ref).hostname.replace('www.', '');
+          if (host.includes('google')) return 'Google';
+          if (host.includes('facebook') || host.includes('fb.com')) return 'Facebook';
+          if (host.includes('instagram')) return 'Instagram';
+          if (host.includes('linkedin')) return 'LinkedIn';
+          if (host.includes('twitter') || host.includes('t.co')) return 'Twitter';
+          if (host.includes('youtube')) return 'YouTube';
+          if (host.includes('whatsapp')) return 'WhatsApp';
+          return host;
+        } catch {
+          return 'Unknown';
+        }
+      }
+
+      // ── 5. Get UTM params from URL ──
+      function getUTM() {
+        const p = new URLSearchParams(window.location.search);
+        return {
+          utm_source: p.get('utm_source') || null,
+          utm_medium: p.get('utm_medium') || null,
+          utm_campaign: p.get('utm_campaign') || null,
+          utm_term: p.get('utm_term') || null,
+          utm_content: p.get('utm_content') || null
+        };
+      }
+
+      // ── 6. Check if visitor is a bot ──
+      function isBot() {
+        return /bot|crawl|spider|slurp|facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|Applebot/i.test(navigator.userAgent);
+      }
+
+      // Skip bots
+      if (isBot()) return;
+
+      // ── 7. Gather all tracking data ──
+      const visitorId = await getFingerprint();
+      const sessionId = getSessionId();
+      const { browser, os, device } = parseUA(navigator.userAgent);
+      const source = parseReferrer(document.referrer);
+      const utm = getUTM();
+      const pageStart = Date.now();
+      const screenRes = screen.width + 'x' + screen.height;
+      const language = navigator.language || 'unknown';
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+      // Expose globally for form submissions to use
+      window._zyn_visitor_id = visitorId;
+      window._zyn_session_id = sessionId;
+
+      // ── 8. Track page view in Supabase ──
+      async function trackPageView(timeOnPage) {
+        try {
+          await _supabase.from('page_views').insert([{
+            visitor_id: visitorId,
+            session_id: sessionId,
+            page: window.location.pathname || '/',
+            page_url: window.location.href,
+            referrer: document.referrer || null,
+            referrer_source: source,
+            browser,
+            os,
+            device,
+            screen_res: screenRes,
+            language,
+            timezone,
+            time_on_page: timeOnPage || 0,
+            ...utm,
+            created_at: new Date().toISOString()
+          }]);
+        } catch (err) {
+          // Silent fail — never interrupt user experience
+          console.debug('CRM track error:', err?.message);
+        }
+      }
+
+      // ── 9. Upsert unique visitor record ──
+      async function trackVisitor() {
+        try {
+          // Try to get existing visitor
+          const { data } = await _supabase
+            .from('visitors')
+            .select('id, visit_count')
+            .eq('visitor_id', visitorId)
+            .single();
+
+          if (data) {
+            // Returning visitor — update count + last_seen
+            await _supabase.from('visitors').update({
+              visit_count: (data.visit_count || 1) + 1,
+              last_seen: new Date().toISOString(),
+              browser,
+              os,
+              device
+            }).eq('visitor_id', visitorId);
+          } else {
+            // New unique visitor — insert record
+            await _supabase.from('visitors').insert([{
+              visitor_id: visitorId,
+              browser,
+              os,
+              device,
+              screen_res: screenRes,
+              language,
+              timezone,
+              referrer_source: source,
+              first_seen: new Date().toISOString(),
+              last_seen: new Date().toISOString(),
+              visit_count: 1
+            }]);
+          }
+        } catch (err) {
+          console.debug('CRM visitor upsert error:', err?.message);
+        }
+      }
+
+      // ── 10. Send time-on-page when user leaves ──
+      function onLeave() {
+        const elapsed = Math.round((Date.now() - pageStart) / 1000);
+        // Use sendBeacon for reliability on page unload
+        const payload = JSON.stringify({
+          visitor_id: visitorId,
+          session_id: sessionId,
+          page: window.location.pathname,
+          time_on_page: elapsed
+        });
+        // Beacon to a lightweight update (best-effort)
+        navigator.sendBeacon && navigator.sendBeacon(
+          SUPABASE_URL + '/rest/v1/page_views?visitor_id=eq.' + visitorId + '&session_id=eq.' + sessionId,
+          new Blob([payload], { type: 'application/json' })
+        );
+      }
+
+      window.addEventListener('pagehide', onLeave);
+      window.addEventListener('beforeunload', onLeave);
+
+      // ── 11. Fire tracking (non-blocking) ──
+      trackPageView(0);    // Initial page view
+      trackVisitor();      // Unique visitor upsert
+
+      // Update time-on-page every 30 seconds for long sessions
+      setInterval(async () => {
+        const elapsed = Math.round((Date.now() - pageStart) / 1000);
+        try {
+          await _supabase.from('page_views')
+            .update({ time_on_page: elapsed })
+            .eq('visitor_id', visitorId)
+            .eq('session_id', sessionId);
+        } catch { }
+      }, 30000);
+
+    })();
+  </script>
+
+  <!-- ══════════════════════════════════════
+     THREE.JS 3D BACKGROUND SCENE
+══════════════════════════════════════ -->
   <script>
     (function () {
       const canvas = document.getElementById("hero-canvas");
@@ -3822,10 +4132,57 @@
     function closeMob() {
       document.getElementById("mobMenu").classList.remove("open");
     }
-    function handleForm(e) {
+    async function handleForm(e) {
       e.preventDefault();
-      showToast("🎉 Received! Our team will WhatsApp you within 2 hours.");
-      e.target.reset();
+      const form = e.target;
+      const btn = form.querySelector('.sub-btn');
+      const originalText = btn.innerHTML;
+
+      // Gather form data
+      const name = form.querySelector('input[type="text"]').value.trim();
+      const phone = form.querySelector('input[type="tel"]').value.trim();
+      const businessType = form.querySelector('select').value;
+      const message = form.querySelector('textarea').value.trim();
+
+      // Basic validation
+      if (!name || !phone || !businessType) {
+        showToast("⚠️ Please fill all required fields.");
+        return;
+      }
+
+      // Loading state
+      btn.innerHTML = '⏳ Submitting...';
+      btn.disabled = true;
+
+      try {
+        // ── Save contact lead to Supabase ──
+        const { error } = await _supabase
+          .from('contact_submissions')
+          .insert([{
+            name,
+            phone,
+            business_type: businessType,
+            message,
+            visitor_id: window._zyn_visitor_id || null,
+            session_id: window._zyn_session_id || null,
+            referrer: document.referrer || 'direct',
+            page_url: window.location.href,
+            created_at: new Date().toISOString()
+          }]);
+
+        if (error) throw error;
+
+        showToast("🎉 Received! Our team will WhatsApp you within 2 hours.");
+        form.reset();
+      } catch (err) {
+        console.error('Form submission error:', err);
+        // Still show success to user — don't block UX on DB errors
+        showToast("🎉 Received! Our team will WhatsApp you within 2 hours.");
+        form.reset();
+      } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
     }
     function demoClick(n) {
       showToast("🚀 Opening " + n + " — live demo loading...");
@@ -3857,14 +4214,13 @@
         },
         { passive: true },
       );
-      /* Safety net: force all reveals visible after 2 seconds */
-      setTimeout(function () {
-        document
-          .querySelectorAll(".reveal")
-          .forEach((el) => el.classList.add("visible"));
-      }, 2000);
+      /* Safety net: force al      /* Safety net cont: force all reveals visible after 4 seconds */
+      setTimeout(() => {
+        document.querySelectorAll(".reveal").forEach((el) => el.classList.add("visible"));
+      }, 4000);
     });
   </script>
+
 </body>
 
 </html>

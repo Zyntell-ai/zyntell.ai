@@ -11,5 +11,7 @@
       "destination": "https://www.zyntell.in/$1",
       "permanent": true
     }
-  ]
+  ],
+  "buildCommand": "node generate-config.js",
+  "outputDirectory": "."
 }
