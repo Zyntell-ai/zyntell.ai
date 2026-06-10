@@ -1,0 +1,6 @@
+{
+  "name": "zyntell",
+  "scripts": {
+    "build": "node generate-config.js"
+  }
+}
