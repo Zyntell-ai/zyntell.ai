@@ -211,6 +211,8 @@
       gap: 5px;
       cursor: pointer;
       padding: 4px;
+      background: none;
+      border: none;
     }
 
     .hamburger span {
@@ -908,6 +910,7 @@
 
     .f-links {
       display: flex;
+      flex-wrap: wrap;
       gap: 1.5rem;
     }
 
@@ -1027,7 +1030,7 @@
       inset: 0;
       background: rgba(11, 15, 26, 0.97);
       backdrop-filter: blur(24px);
-      z-index: 999;
+      z-index: 1001; /* above the fixed nav so the close button is clickable */
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -1047,6 +1050,10 @@
     }
 
     .mob-menu a:hover { color: var(--accent); }
+
+    /* Mobile menu CTA — overrides the 960px rule that hides .nav-cta */
+    .mob-menu .nav-cta { display: inline-block; color: #fff; font-size: 1.1rem; padding: 0.75rem 1.8rem; }
+    .mob-menu .nav-cta:hover { color: #fff; }
 
     .mob-close {
       position: absolute;
@@ -1083,6 +1090,25 @@
       .cta-box { padding: 3rem 1.5rem; }
       .flagship-metrics { gap: 1.2rem; }
     }
+    /* ══════════════════════════════════════════
+   FOCUS + CTA ROW POLISH
+══════════════════════════════════════════ */
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    /* Flagship actions: align with the left-aligned copy, fit on one row on desktop */
+    .flagship-left .hero-btns {
+      justify-content: flex-start;
+    }
+
+    .flagship-left .hero-btns .btn-g {
+      padding-left: 1.3rem;
+      padding-right: 1.3rem;
+    }
+
   </style>
 </head>
 
@@ -1099,22 +1125,22 @@
       <li><a href="index.html#contact">Contact</a></li>
     </ul>
     <div class="nav-r">
-      <button class="theme-nav-btn" id="navBtn" onclick="toggleTheme()" title="Toggle theme">🌙</button>
-      <a href="index.html#contact" class="nav-cta">Get Started</a>
-      <div class="hamburger" onclick="openMob()">
+      <button class="theme-nav-btn" id="navBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle theme">🌙</button>
+      <a href="register.html" class="nav-cta">Start Free Trial</a>
+      <button class="hamburger" type="button" onclick="openMob()" aria-label="Open menu" aria-controls="mobMenu" aria-expanded="false">
         <span></span><span></span><span></span>
-      </div>
+      </button>
     </div>
   </nav>
 
   <div class="mob-menu" id="mobMenu">
-    <button class="mob-close" onclick="closeMob()">✕</button>
+    <button class="mob-close" type="button" onclick="closeMob(true)" aria-label="Close menu">✕</button>
     <a href="index.html" onclick="closeMob()">Home</a>
     <a href="services.html" onclick="closeMob()">Services</a>
     <a href="index.html#demo" onclick="closeMob()">Demo</a>
     <a href="index.html#founders" onclick="closeMob()">Founders</a>
     <a href="index.html#contact" onclick="closeMob()">Contact</a>
-    <a href="index.html#contact" class="nav-cta" onclick="closeMob()">Get Started</a>
+    <a href="register.html" class="nav-cta" onclick="closeMob()">Start Free Trial</a>
   </div>
 
   <!-- ══ PAGE HERO ══ -->
@@ -1209,7 +1235,8 @@
             </div>
 
             <div class="hero-btns" style="margin-top:0">
-              <a href="index.html#demo" class="btn-p">⚡ Try Live Demo</a>
+              <a href="register.html" class="btn-p">🚀 Start Free Trial</a>
+              <a href="index.html#demo" class="btn-g">⚡ Try Live Demo</a>
               <a href="index.html#contact" class="btn-g">📅 Book a Call</a>
             </div>
           </div>
@@ -1477,6 +1504,7 @@
         <a href="index.html#demo">Demo</a>
         <a href="index.html#founders">About</a>
         <a href="index.html#contact">Contact</a>
+        <a href="register.html">Register</a>
         <a href="#">Privacy</a>
       </div>
       <div class="f-socials">
@@ -1512,8 +1540,20 @@
     }
 
     // Mobile menu
-    function openMob() { document.getElementById("mobMenu").classList.add("open"); }
-    function closeMob() { document.getElementById("mobMenu").classList.remove("open"); }
+    function openMob() {
+      document.getElementById("mobMenu").classList.add("open");
+      document.querySelector(".hamburger").setAttribute("aria-expanded", "true");
+      document.querySelector(".mob-close").focus();
+    }
+    function closeMob(returnFocus) {
+      document.getElementById("mobMenu").classList.remove("open");
+      const ham = document.querySelector(".hamburger");
+      ham.setAttribute("aria-expanded", "false");
+      if (returnFocus) ham.focus({ preventScroll: true });
+    }
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && document.getElementById("mobMenu").classList.contains("open")) closeMob(true);
+    });
 
     // Nav scroll
     const nav = document.getElementById("nav");

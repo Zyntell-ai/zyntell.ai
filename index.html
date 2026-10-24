@@ -317,6 +317,8 @@
       gap: 5px;
       cursor: pointer;
       padding: 4px;
+      background: none;
+      border: none;
     }
 
     .hamburger span {
@@ -2285,6 +2287,7 @@
 
     .f-links {
       display: flex;
+      flex-wrap: wrap;
       gap: 1.5rem;
     }
 
@@ -2544,7 +2547,7 @@
       inset: 0;
       background: rgba(11, 15, 26, 0.97);
       backdrop-filter: blur(24px);
-      z-index: 999;
+      z-index: 1001; /* above the fixed nav so the close button is clickable */
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -2568,6 +2571,16 @@
       transition: color 0.3s;
     }
 
+    /* Mobile menu CTA — overrides the 960px rule that hides .nav-cta */
+    .mob-menu .nav-cta {
+      display: inline-block;
+      color: #fff;
+      font-size: 1.1rem;
+      padding: 0.75rem 1.8rem;
+    }
+    .mob-menu .nav-cta:hover {
+      color: #fff;
+    }
     .mob-menu a:hover {
       color: var(--accent);
     }
@@ -2582,6 +2595,21 @@
       border: none;
       color: var(--text-secondary);
     }
+    /* ══════════════════════════════════════════
+   FOCUS + CTA ROW POLISH
+══════════════════════════════════════════ */
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    /* Fit the three hero actions on one row on desktop */
+    .hero-btns .btn-g {
+      padding-left: 1.3rem;
+      padding-right: 1.3rem;
+    }
+
   </style>
 </head>
 
@@ -2597,23 +2625,23 @@
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-r">
-      <button class="theme-nav-btn" id="navBtn" onclick="toggleTheme()" title="Toggle theme">
+      <button class="theme-nav-btn" id="navBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle theme">
         🌙
       </button>
-      <a href="#demo" class="nav-cta">Try Demo</a>
-      <div class="hamburger" onclick="openMob()">
+      <a href="register.html" class="nav-cta">Start Free Trial</a>
+      <button class="hamburger" type="button" onclick="openMob()" aria-label="Open menu" aria-controls="mobMenu" aria-expanded="false">
         <span></span><span></span><span></span>
-      </div>
+      </button>
     </div>
   </nav>
   <div class="mob-menu" id="mobMenu">
-    <button class="mob-close" onclick="closeMob()">✕</button>
+    <button class="mob-close" type="button" onclick="closeMob(true)" aria-label="Close menu">✕</button>
     <a href="#hero" onclick="closeMob()">Home</a>
     <a href="services.html" onclick="closeMob()">Services</a>
     <a href="#demo" onclick="closeMob()">Demo</a>
     <a href="#founders" onclick="closeMob()">Founders</a>
     <a href="#contact" onclick="closeMob()">Contact</a>
-    <a href="#demo" class="nav-cta" onclick="closeMob()">Try Demo</a>
+    <a href="register.html" class="nav-cta" onclick="closeMob()">Start Free Trial</a>
   </div>
 
   <!-- ══ HERO ══ -->
@@ -2633,7 +2661,8 @@
           every channel.
         </p>
         <div class="hero-btns">
-          <a href="#demo" class="btn-p">⚡ Try Demo</a>
+          <a href="register.html" class="btn-p">🚀 Start Free Trial</a>
+          <a href="#demo" class="btn-g">⚡ Try Demo</a>
           <a href="#how" class="btn-g">▶ How It Works</a>
         </div>
         <div class="hero-stats">
@@ -3425,7 +3454,8 @@
           for your business within 24 hours.
         </p>
         <div class="cta-btns">
-          <a href="#demo" class="btn-p">⚡ Try Demo Free</a>
+          <a href="register.html" class="btn-p">🚀 Start Free Trial</a>
+          <a href="#demo" class="btn-g">⚡ Try Demo Free</a>
           <a href="#contact" class="btn-g">📅 Book a Demo Call</a>
         </div>
       </div>
@@ -3497,7 +3527,7 @@
       <div class="fl">ZYNTELL</div>
       <div class="f-links">
         <a href="#hero">Home</a><a href="services.html">Services</a><a href="#demo">Demo</a>
-        <a href="#founders">About</a><a href="#contact">Contact</a><a href="#">Privacy</a>
+        <a href="#founders">About</a><a href="#contact">Contact</a><a href="register.html">Register</a><a href="#">Privacy</a>
       </div>
       <div class="f-socials">
         <!-- Instagram -->
@@ -4131,10 +4161,18 @@
     document.querySelectorAll(".reveal").forEach((el) => obs.observe(el));
     function openMob() {
       document.getElementById("mobMenu").classList.add("open");
+      document.querySelector(".hamburger").setAttribute("aria-expanded", "true");
+      document.querySelector(".mob-close").focus();
     }
-    function closeMob() {
+    function closeMob(returnFocus) {
       document.getElementById("mobMenu").classList.remove("open");
+      const ham = document.querySelector(".hamburger");
+      ham.setAttribute("aria-expanded", "false");
+      if (returnFocus) ham.focus({ preventScroll: true });
     }
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && document.getElementById("mobMenu").classList.contains("open")) closeMob(true);
+    });
     async function handleForm(e) {
       e.preventDefault();
       const form = e.target;
